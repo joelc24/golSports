@@ -1,3 +1,3 @@
 export enum Config {
-    baseUrlApi = 'http://localhost:8080/api'
+    baseUrlApi = 'https://liga-football-production.up.railway.app/api'
 }

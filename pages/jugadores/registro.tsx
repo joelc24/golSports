@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { GetServerSideProps, NextPage } from 'next'
+import { GetStaticProps, NextPage } from 'next'
 
 import { classNames } from 'primereact/utils';
 import { InputText } from 'primereact/inputtext';
@@ -33,8 +33,7 @@ const RegistroJugadores: NextPage<Props> = ({ data, posicionJugadores: { posicio
     const [filteredEquipos, setFilteredEquipos] = useState<IEquipo[]>([])
 
     const { equipos } = useEquipos({ url: 'equipos', config: {
-        fallbackData: data,
-        revalidateOnMount: false
+        fallbackData: data
     } })
 
     const { handleSubmit, control, formState: { errors } } = useForm<FormData>()
@@ -210,8 +209,8 @@ const RegistroJugadores: NextPage<Props> = ({ data, posicionJugadores: { posicio
 export default RegistroJugadores
 
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
+export const getStaticProps: GetStaticProps = async (ctx) => {
     const equipos: IEquipoResponse = await fetcher(`${Config.baseUrlApi}/equipos`)
     const posiciones: IPosicionJugadores = await fetcher(`${Config.baseUrlApi}/jugadores/posiciones`)
 
